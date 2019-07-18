@@ -25,6 +25,7 @@ public class RateController {
         System.out.println("134");
         TpTradeRate tpTradeRate = tradeRateMapper.selectByPrimaryKey(1);
         System.out.println(tpTradeRate.toString());
+//        tradeRateMapper.toString();
         return "success";
     }
 }
