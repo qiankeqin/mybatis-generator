@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dayuarchi.tool.mybatisgenerator.dao.TpTradeRateMapper" >
+  <resultMap id="BaseResultMap" type="com.dayuarchi.tool.mybatisgenerator.model.TpTradeRate" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="channel" property="channel" jdbcType="TINYINT" />
+    <result column="bank_id" property="bankId" jdbcType="INTEGER" />
+    <result column="bank_flag" property="bankFlag" jdbcType="VARCHAR" />
+    <result column="trade_flag" property="tradeFlag" jdbcType="VARCHAR" />
+    <result column="rate_type" property="rateType" jdbcType="VARCHAR" />
+    <result column="fixRate" property="fixrate" jdbcType="VARCHAR" />
+    <result column="percent_rate" property="percentRate" jdbcType="VARCHAR" />
+    <result column="summary_percent_rate" property="summaryPercentRate" jdbcType="VARCHAR" />
+    <result column="need_summary_rate" property="needSummaryRate" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="is_deprecated" property="isDeprecated" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, channel, bank_id, bank_flag, trade_flag, rate_type, fixRate, percent_rate, summary_percent_rate, 
+    need_summary_rate, create_time, is_deprecated
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dayuarchi.tool.mybatisgenerator.model.TpTradeRateCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tp_trade_rate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tp_trade_rate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tp_trade_rate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dayuarchi.tool.mybatisgenerator.model.TpTradeRateCriteria" >
+    delete from tp_trade_rate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dayuarchi.tool.mybatisgenerator.model.TpTradeRate" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tp_trade_rate (channel, bank_id, bank_flag, 
+      trade_flag, rate_type, fixRate, 
+      percent_rate, summary_percent_rate, need_summary_rate, 
+      create_time, is_deprecated)
+    values (#{channel,jdbcType=TINYINT}, #{bankId,jdbcType=INTEGER}, #{bankFlag,jdbcType=VARCHAR}, 
+      #{tradeFlag,jdbcType=VARCHAR}, #{rateType,jdbcType=VARCHAR}, #{fixrate,jdbcType=VARCHAR}, 
+      #{percentRate,jdbcType=VARCHAR}, #{summaryPercentRate,jdbcType=VARCHAR}, #{needSummaryRate,jdbcType=BIT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{isDeprecated,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dayuarchi.tool.mybatisgenerator.model.TpTradeRate" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tp_trade_rate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="bankId != null" >
+        bank_id,
+      </if>
+      <if test="bankFlag != null" >
+        bank_flag,
+      </if>
+      <if test="tradeFlag != null" >
+        trade_flag,
+      </if>
+      <if test="rateType != null" >
+        rate_type,
+      </if>
+      <if test="fixrate != null" >
+        fixRate,
+      </if>
+      <if test="percentRate != null" >
+        percent_rate,
+      </if>
+      <if test="summaryPercentRate != null" >
+        summary_percent_rate,
+      </if>
+      <if test="needSummaryRate != null" >
+        need_summary_rate,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="isDeprecated != null" >
+        is_deprecated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="channel != null" >
+        #{channel,jdbcType=TINYINT},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="bankFlag != null" >
+        #{bankFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeFlag != null" >
+        #{tradeFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="rateType != null" >
+        #{rateType,jdbcType=VARCHAR},
+      </if>
+      <if test="fixrate != null" >
+        #{fixrate,jdbcType=VARCHAR},
+      </if>
+      <if test="percentRate != null" >
+        #{percentRate,jdbcType=VARCHAR},
+      </if>
+      <if test="summaryPercentRate != null" >
+        #{summaryPercentRate,jdbcType=VARCHAR},
+      </if>
+      <if test="needSummaryRate != null" >
+        #{needSummaryRate,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeprecated != null" >
+        #{isDeprecated,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dayuarchi.tool.mybatisgenerator.model.TpTradeRateCriteria" resultType="java.lang.Integer" >
+    select count(*) from tp_trade_rate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tp_trade_rate
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.channel != null" >
+        channel = #{record.channel,jdbcType=TINYINT},
+      </if>
+      <if test="record.bankId != null" >
+        bank_id = #{record.bankId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bankFlag != null" >
+        bank_flag = #{record.bankFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeFlag != null" >
+        trade_flag = #{record.tradeFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rateType != null" >
+        rate_type = #{record.rateType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fixrate != null" >
+        fixRate = #{record.fixrate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.percentRate != null" >
+        percent_rate = #{record.percentRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summaryPercentRate != null" >
+        summary_percent_rate = #{record.summaryPercentRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.needSummaryRate != null" >
+        need_summary_rate = #{record.needSummaryRate,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.isDeprecated != null" >
+        is_deprecated = #{record.isDeprecated,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tp_trade_rate
+    set id = #{record.id,jdbcType=INTEGER},
+      channel = #{record.channel,jdbcType=TINYINT},
+      bank_id = #{record.bankId,jdbcType=INTEGER},
+      bank_flag = #{record.bankFlag,jdbcType=VARCHAR},
+      trade_flag = #{record.tradeFlag,jdbcType=VARCHAR},
+      rate_type = #{record.rateType,jdbcType=VARCHAR},
+      fixRate = #{record.fixrate,jdbcType=VARCHAR},
+      percent_rate = #{record.percentRate,jdbcType=VARCHAR},
+      summary_percent_rate = #{record.summaryPercentRate,jdbcType=VARCHAR},
+      need_summary_rate = #{record.needSummaryRate,jdbcType=BIT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      is_deprecated = #{record.isDeprecated,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dayuarchi.tool.mybatisgenerator.model.TpTradeRate" >
+    update tp_trade_rate
+    <set >
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=TINYINT},
+      </if>
+      <if test="bankId != null" >
+        bank_id = #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="bankFlag != null" >
+        bank_flag = #{bankFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeFlag != null" >
+        trade_flag = #{tradeFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="rateType != null" >
+        rate_type = #{rateType,jdbcType=VARCHAR},
+      </if>
+      <if test="fixrate != null" >
+        fixRate = #{fixrate,jdbcType=VARCHAR},
+      </if>
+      <if test="percentRate != null" >
+        percent_rate = #{percentRate,jdbcType=VARCHAR},
+      </if>
+      <if test="summaryPercentRate != null" >
+        summary_percent_rate = #{summaryPercentRate,jdbcType=VARCHAR},
+      </if>
+      <if test="needSummaryRate != null" >
+        need_summary_rate = #{needSummaryRate,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeprecated != null" >
+        is_deprecated = #{isDeprecated,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dayuarchi.tool.mybatisgenerator.model.TpTradeRate" >
+    update tp_trade_rate
+    set channel = #{channel,jdbcType=TINYINT},
+      bank_id = #{bankId,jdbcType=INTEGER},
+      bank_flag = #{bankFlag,jdbcType=VARCHAR},
+      trade_flag = #{tradeFlag,jdbcType=VARCHAR},
+      rate_type = #{rateType,jdbcType=VARCHAR},
+      fixRate = #{fixrate,jdbcType=VARCHAR},
+      percent_rate = #{percentRate,jdbcType=VARCHAR},
+      summary_percent_rate = #{summaryPercentRate,jdbcType=VARCHAR},
+      need_summary_rate = #{needSummaryRate,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      is_deprecated = #{isDeprecated,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.dayuarchi.tool.mybatisgenerator.model.TpTradeRateCriteria" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tp_trade_rate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
